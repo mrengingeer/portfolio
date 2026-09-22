@@ -16,12 +16,12 @@ const { title } = Astro.props;
       content="Your Name - Software Developer building interactive and seamless digital experiences with cutting-edge frontend development."
     />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="icon" type="image/png" href={`${import.meta.env.BASE_URL}favicon.png`} />
     <link rel="canonical" href="https://darkminimal.vercel.app/" />
 
     <link
       rel="preload"
-      href="/fonts/montserrat-latin-wght-normal.woff2"
+      href={`${import.meta.env.BASE_URL}fonts/montserrat-latin-wght-normal.woff2`}
       as="font"
       type="font/woff2"
       crossorigin="anonymous"
@@ -43,7 +43,7 @@ const { title } = Astro.props;
     <meta property="og:type" content="website" />
     <meta
       property="og:site_name"
-      content="Your Name Portfolio"
+      content="Taninders Portfolio"
     />
 
     <!-- Structured Data (JSON-LD) -->
