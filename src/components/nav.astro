@@ -151,30 +151,38 @@ const navItems: NavItem[] = [
     });
   });
 
-  document.addEventListener("DOMContentLoaded", () => {
-    const sections = document.querySelectorAll("section[id]");
-    const navLinks = document.querySelectorAll("nav a[href^='#']");
-    const observerOptions = { threshold: 0.6 };
+document.addEventListener("DOMContentLoaded", () => {
+  const sections = Array.from(document.querySelectorAll("section[id]"));
+  const navLinks = document.querySelectorAll("nav a[href^='#']");
 
-    const observerCallback = (entries: IntersectionObserverEntry[]) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          navLinks.forEach((link) => link.classList.remove("active"));
-          const id = entry.target.getAttribute("id");
-          const activeLink = document.querySelector(`nav a[href="#${id}"]`);
-          if (activeLink) {
-            activeLink.classList.add("active");
-          }
-        }
-      });
-    };
+  function updateActiveSection() {
+    const scrollPosition = window.scrollY + window.innerHeight * 0.3;
 
-    const observer = new IntersectionObserver(
-      observerCallback,
-      observerOptions
-    );
-    sections.forEach((section) => observer.observe(section));
+    let activeSection = sections[0];
+
+    for (const section of sections) {
+      const sectionTop = section.getBoundingClientRect().top + window.scrollY;
+
+      if (sectionTop <= scrollPosition) {
+        activeSection = section;
+      }
+    }
+
+    navLinks.forEach((link) => link.classList.remove("active"));
+
+    const id = activeSection?.getAttribute("id");
+    if (id) {
+      const activeLink = document.querySelector(`nav a[href="#${id}"]`);
+      activeLink?.classList.add("active");
+    }
+  }
+
+  window.addEventListener("scroll", updateActiveSection, {
+    passive: true,
   });
+
+  updateActiveSection();
+});
 </script>
 
 <style>
