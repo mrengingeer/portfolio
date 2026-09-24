@@ -1,0 +1,577 @@
+---
+const base = import.meta.env.BASE_URL;
+
+const technologies = [
+  "Home Assistant",
+  "ESP32",
+  "ESPHome",
+  "Zigbee",
+  "Frigate",
+  "RTSP",
+  "MQTT",
+  "YAML",
+];
+
+const automations = [
+  {
+    title: "Vehicle Arrival",
+    description:
+      "Uses phone-based GPS presence to determine when the vehicle arrives home and trigger garage-related automations.",
+    image: `${base}/projects/home-assistant/vehicle-arrival.png`,
+  },
+  {
+    title: "Camera Detection",
+    description:
+      "Local camera streams are processed through Frigate for object detection and integrated into Home Assistant.",
+    image: `${base}/projects/home-assistant/frigate.png`,
+  },
+  {
+    title: "Smart Blinds",
+    description:
+      "Zigbee-controlled blinds are integrated into Home Assistant for centralized control and automation.",
+    image: `${base}/projects/home-assistant/blinds.png`,
+  },
+  {
+    title: "ESP32 Control Panel",
+    description:
+      "A custom ESP32-S3 touchscreen interface provides a dedicated dashboard for controlling and monitoring the home.",
+    image: `${base}/projects/home-assistant/control-panel.png`,
+  },
+];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Home Assistant Smart Home | Taninder Thiara</title>
+
+    <meta
+      name="description"
+      content="A technical case study of Taninder Thiara's locally controlled Home Assistant smart-home ecosystem integrating ESP32, ESPHome, Zigbee, Frigate and custom automations."
+    />
+
+    <link
+      rel="icon"
+      type="image/png"
+      href={`${base}/favicon.png`}
+    />
+  </head>
+
+  <body class="bg-[var(--background)] text-[var(--white)] sm:px-28 lg:px-20 px-9">
+
+    <!-- Navigation -->
+    <nav class="max-w-5xl mx-auto py-8 flex items-center justify-between">
+      <a
+        href={`${base}/`}
+        class="text-[var(--white-icon)] hover:text-white transition"
+      >
+        ← Back to Portfolio
+      </a>
+
+      <a
+        href="https://github.com/mrengingeer"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-[var(--white-icon)] hover:text-white transition"
+      >
+        GitHub ↗
+      </a>
+    </nav>
+
+
+    <main class="max-w-5xl mx-auto pb-24">
+
+      <!-- Hero -->
+      <section class="pt-12 md:pt-20">
+
+        <p class="text-sm uppercase tracking-[0.2em] text-[var(--sec)] mb-4">
+          Featured Project · IoT / Automation
+        </p>
+
+        <h1 class="text-4xl md:text-6xl font-semibold leading-tight mb-6">
+          Home Assistant
+          <br />
+          Smart Home
+        </h1>
+
+        <p class="max-w-3xl text-lg md:text-xl text-[var(--white-icon)] leading-relaxed">
+          A locally controlled smart-home ecosystem built around Home Assistant,
+          connecting IoT devices, custom ESP32 hardware, Zigbee devices,
+          security cameras and vehicle presence into a single automation platform.
+        </p>
+
+
+        <!-- Technology tags -->
+        <div class="flex flex-wrap gap-2 mt-8">
+          {
+            technologies.map((technology) => (
+              <span
+                class="px-3 py-1.5 rounded-full border border-[var(--white-icon-tr)] bg-[#1414149c] text-sm text-[var(--white-icon)]"
+              >
+                {technology}
+              </span>
+            ))
+          }
+        </div>
+
+      </section>
+
+
+      <!-- Hero image -->
+      <section class="mt-14">
+
+        <div class="rounded-2xl overflow-hidden border border-[var(--white-icon-tr)]">
+          <img
+            src={`${base}/projects/home-assistant/hero.png`}
+            alt="Home Assistant smart home dashboard"
+            class="w-full object-cover"
+          />
+        </div>
+
+      </section>
+
+
+      <!-- Overview -->
+      <section class="mt-20">
+
+        <p class="text-sm uppercase tracking-[0.2em] text-[var(--sec)] mb-3">
+          Overview
+        </p>
+
+        <h2 class="text-3xl md:text-4xl font-medium mb-6">
+          Building a connected home
+        </h2>
+
+        <div class="max-w-3xl text-[var(--white-icon)] text-base md:text-lg leading-relaxed space-y-5">
+
+          <p>
+            This project started as an effort to bring different smart-home
+            devices into one locally controlled system rather than relying on
+            separate manufacturer applications.
+          </p>
+
+          <p>
+            Home Assistant acts as the central platform, connecting devices
+            through Zigbee, Wi-Fi, ESPHome and other local integrations.
+            Custom automations then allow these devices to respond to events
+            such as vehicle arrival, time of day, device state and camera
+            detections.
+          </p>
+
+          <p>
+            The system has also evolved beyond basic device control, with
+            custom ESP32 hardware, camera processing through Frigate and
+            location-based automations.
+          </p>
+
+        </div>
+
+      </section>
+
+
+      <!-- Architecture -->
+      <section class="mt-20">
+
+        <p class="text-sm uppercase tracking-[0.2em] text-[var(--sec)] mb-3">
+          Architecture
+        </p>
+
+        <h2 class="text-3xl md:text-4xl font-medium mb-8">
+          How everything connects
+        </h2>
+
+        <div class="rounded-2xl border border-[var(--white-icon-tr)] bg-[#1414149c] p-6 md:p-10">
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-5 items-center text-center">
+
+            <div class="rounded-xl border border-[var(--white-icon-tr)] p-6">
+              <p class="text-lg font-semibold">Devices</p>
+              <p class="text-sm text-[var(--white-icon)] mt-2">
+                Zigbee · ESP32 · Cameras · Sensors
+              </p>
+            </div>
+
+            <div class="text-2xl text-[var(--sec)]">
+              →
+            </div>
+
+            <div class="rounded-xl border border-[var(--white-icon-tr)] p-6">
+              <p class="text-lg font-semibold">Home Assistant</p>
+              <p class="text-sm text-[var(--white-icon)] mt-2">
+                Integrations · States · Automations
+              </p>
+            </div>
+
+            <div class="hidden md:block"></div>
+
+            <div class="text-2xl text-[var(--sec)]">
+              ↓
+            </div>
+
+            <div class="rounded-xl border border-[var(--white-icon-tr)] p-6">
+              <p class="text-lg font-semibold">Actions</p>
+              <p class="text-sm text-[var(--white-icon)] mt-2">
+                Lights · Blinds · Garage · Notifications
+              </p>
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- Automations -->
+      <section class="mt-20">
+
+        <p class="text-sm uppercase tracking-[0.2em] text-[var(--sec)] mb-3">
+          Automations
+        </p>
+
+        <h2 class="text-3xl md:text-4xl font-medium mb-4">
+          Turning events into actions
+        </h2>
+
+        <p class="max-w-3xl text-[var(--white-icon)] text-lg leading-relaxed mb-10">
+          The most interesting part of the system is the automation layer.
+          Instead of controlling every device manually, Home Assistant
+          combines information from multiple sources to trigger actions.
+        </p>
+
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+          {
+            automations.map((automation) => (
+              <article class="rounded-2xl border border-[var(--white-icon-tr)] bg-[#1414149c] overflow-hidden">
+
+                <img
+                  src={automation.image}
+                  alt={automation.title}
+                  class="w-full aspect-video object-cover"
+                  loading="lazy"
+                />
+
+                <div class="p-6">
+
+                  <h3 class="text-2xl font-semibold mb-3">
+                    {automation.title}
+                  </h3>
+
+                  <p class="text-[var(--white-icon)] leading-relaxed">
+                    {automation.description}
+                  </p>
+
+                </div>
+
+              </article>
+            ))
+          }
+
+        </div>
+
+      </section>
+
+
+      <!-- Vehicle automation -->
+      <section class="mt-20">
+
+        <p class="text-sm uppercase tracking-[0.2em] text-[var(--sec)] mb-3">
+          Example Automation
+        </p>
+
+        <h2 class="text-3xl md:text-4xl font-medium mb-6">
+          Vehicle arrival detection
+        </h2>
+
+        <p class="max-w-3xl text-[var(--white-icon)] text-lg leading-relaxed mb-8">
+          One of the more complex automations uses location data from a
+          mobile device to determine when the vehicle is approaching home.
+          Home Assistant can then use that presence information as an input
+          to other automations.
+        </p>
+
+
+        <div class="rounded-2xl border border-[var(--white-icon-tr)] bg-[#1414149c] p-6 md:p-10">
+
+          <div class="flex flex-col md:flex-row items-center justify-between gap-5">
+
+            <div class="text-center">
+              <div class="text-3xl mb-2">📱</div>
+              <p class="font-medium">Phone GPS</p>
+              <p class="text-xs text-[var(--white-icon)]">
+                Location
+              </p>
+            </div>
+
+            <div class="text-2xl text-[var(--sec)]">→</div>
+
+            <div class="text-center">
+              <div class="text-3xl mb-2">📍</div>
+              <p class="font-medium">Home Zone</p>
+              <p class="text-xs text-[var(--white-icon)]">
+                Presence
+              </p>
+            </div>
+
+            <div class="text-2xl text-[var(--sec)]">→</div>
+
+            <div class="text-center">
+              <div class="text-3xl mb-2">⚙️</div>
+              <p class="font-medium">Automation</p>
+              <p class="text-xs text-[var(--white-icon)]">
+                Logic
+              </p>
+            </div>
+
+            <div class="text-2xl text-[var(--sec)]">→</div>
+
+            <div class="text-center">
+              <div class="text-3xl mb-2">🏠</div>
+              <p class="font-medium">Home Action</p>
+              <p class="text-xs text-[var(--white-icon)]">
+                Device control
+              </p>
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- Camera system -->
+      <section class="mt-20">
+
+        <p class="text-sm uppercase tracking-[0.2em] text-[var(--sec)] mb-3">
+          Computer Vision
+        </p>
+
+        <h2 class="text-3xl md:text-4xl font-medium mb-6">
+          Local camera processing with Frigate
+        </h2>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+
+          <div class="text-[var(--white-icon)] text-lg leading-relaxed space-y-5">
+
+            <p>
+              Security cameras provide RTSP streams that can be processed
+              locally through Frigate rather than sending the camera feeds
+              to an external cloud service.
+            </p>
+
+            <p>
+              Frigate provides object detection and integrates with
+              Home Assistant, allowing camera events to become inputs for
+              automations and notifications.
+            </p>
+
+          </div>
+
+          <div class="rounded-2xl overflow-hidden border border-[var(--white-icon-tr)]">
+            <img
+              src={`${base}/projects/home-assistant/frigate-detail.png`}
+              alt="Frigate camera detection"
+              class="w-full object-cover"
+              loading="lazy"
+            />
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- ESP32 -->
+      <section class="mt-20">
+
+        <p class="text-sm uppercase tracking-[0.2em] text-[var(--sec)] mb-3">
+          Custom Hardware
+        </p>
+
+        <h2 class="text-3xl md:text-4xl font-medium mb-6">
+          ESP32 and ESPHome
+        </h2>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+
+          <div class="rounded-2xl overflow-hidden border border-[var(--white-icon-tr)]">
+            <img
+              src={`${base}/projects/home-assistant/esp32.png`}
+              alt="Custom ESP32 Home Assistant controller"
+              class="w-full object-cover"
+              loading="lazy"
+            />
+          </div>
+
+          <div class="text-[var(--white-icon)] text-lg leading-relaxed space-y-5">
+
+            <p>
+              Custom ESP32 devices extend the system beyond commercially
+              available smart-home products.
+            </p>
+
+            <p>
+              ESPHome provides the interface between custom hardware and
+              Home Assistant, allowing sensors, controls and displays to
+              become native entities inside the smart-home system.
+            </p>
+
+            <p>
+              This approach also makes it possible to build interfaces and
+              devices specifically around the needs of the home.
+            </p>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- Engineering challenges -->
+      <section class="mt-20">
+
+        <p class="text-sm uppercase tracking-[0.2em] text-[var(--sec)] mb-3">
+          Engineering Challenges
+        </p>
+
+        <h2 class="text-3xl md:text-4xl font-medium mb-8">
+          Problems worth solving
+        </h2>
+
+        <div class="space-y-4">
+
+          <div class="rounded-xl border border-[var(--white-icon-tr)] p-6">
+            <h3 class="text-xl font-semibold mb-2">
+              Keeping the system local
+            </h3>
+
+            <p class="text-[var(--white-icon)] leading-relaxed">
+              Designed the system around local communication wherever
+              practical, reducing reliance on cloud services and external
+              dependencies.
+            </p>
+          </div>
+
+
+          <div class="rounded-xl border border-[var(--white-icon-tr)] p-6">
+            <h3 class="text-xl font-semibold mb-2">
+              Integrating different ecosystems
+            </h3>
+
+            <p class="text-[var(--white-icon)] leading-relaxed">
+              Combined devices using different protocols and integrations
+              into a unified Home Assistant environment.
+            </p>
+          </div>
+
+
+          <div class="rounded-xl border border-[var(--white-icon-tr)] p-6">
+            <h3 class="text-xl font-semibold mb-2">
+              Making automations reliable
+            </h3>
+
+            <p class="text-[var(--white-icon)] leading-relaxed">
+              Automations need to account for device state, timing,
+              presence and changing conditions rather than simply executing
+              a single action.
+            </p>
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- Future -->
+      <section class="mt-20">
+
+        <p class="text-sm uppercase tracking-[0.2em] text-[var(--sec)] mb-3">
+          What's Next
+        </p>
+
+        <h2 class="text-3xl md:text-4xl font-medium mb-6">
+          Continuing to evolve the system
+        </h2>
+
+        <p class="max-w-3xl text-[var(--white-icon)] text-lg leading-relaxed">
+          The system is intentionally modular, making it possible to add
+          additional sensors, automations, computer-vision capabilities and
+          custom hardware over time.
+        </p>
+
+      </section>
+
+
+      <!-- Footer navigation -->
+      <section class="mt-20 pt-10 border-t border-[#ffffff10]">
+
+        <div class="flex flex-col md:flex-row gap-4 justify-between">
+
+          <a
+            href={`${base}/`}
+            class="text-[var(--white-icon)] hover:text-white transition"
+          >
+            ← Back to Portfolio
+          </a>
+
+          <a
+            href="https://github.com/mrengingeer"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-[var(--white-icon)] hover:text-white transition"
+          >
+            View GitHub ↗
+          </a>
+
+        </div>
+
+      </section>
+
+    </main>
+
+  </body>
+</html>
+
+
+<style is:global>
+  @font-face {
+    font-family: "Montserrat Variable";
+    src: url("/portfolio/fonts/montserrat-latin-wght-normal.woff2")
+      format("woff2-variations");
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  :root {
+    --background: #101010;
+    --sec: #a476ff;
+    --white: #dfdfdf;
+    --white-icon: #f3f3f398;
+    --white-icon-tr: #f3f3f310;
+  }
+
+  * {
+    font-family:
+      "Montserrat Variable",
+      -apple-system,
+      system-ui,
+      sans-serif;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+  }
+
+  *::selection {
+    background-color: var(--sec);
+    color: var(--background);
+  }
+</style>
