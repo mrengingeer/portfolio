@@ -1,44 +1,58 @@
 ---
 const technologies = [
-  "astro",
-  "vue",
-  "react",
-  "typeScript",
-  "tailwindcss",
-  "next",
-  "nodejs",
-  "HTML5",
-  "CSS3",
-  "javaScript",
-  "git",
-  "supabase",
-  "mysql",
-  "bash",
+  { name: "Python", icon: "python" },
+  { name: "Java", icon: "java" },
+  { name: "C/C++", icon: "cpp" },
+  { name: "C#/.NET", icon: "csharp" },
+  { name: "Kotlin", icon: "kotlin" },
+  { name: "AWS", icon: "aws" },
+  { name: "Jira", icon: "jira" },
+  { name: "Jenkins", icon: "jenkins" },
+  { name: "GitLab", icon: "gitlab" },
+  { name: "Pytorch", icon: "pytorch" },
+  { name: "OpenCV", icon: "opencv" },
+  { name: "Astro", icon: "astro" },
+  { name: "React", icon: "react" },
+  { name: "TypeScript", icon: "typeScript" },
+  { name: "Tailwind CSS", icon: "tailwindcss" },
+  { name: "Next.js", icon: "next" },
+  { name: "Node.js", icon: "nodejs" },
+  { name: "HTML5", icon: "HTML5" },
+  { name: "CSS3", icon: "CSS3" },
+  { name: "JavaScript", icon: "javaScript" },
+  { name: "Git", icon: "git" },
+  { name: "MySQL", icon: "mysql" },
 ];
 ---
 
 <div class="relative overflow-x-hidden py-8">
-  <div class="pointer-events-none absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-[var(--background)] to-transparent z-20"></div>
-  <div class="pointer-events-none absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-[var(--background)] to-transparent z-20"></div>
+  <div
+    class="pointer-events-none absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-[var(--background)] to-transparent z-20"
+  ></div>
+
+  <div
+    class="pointer-events-none absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-[var(--background)] to-transparent z-20"
+  ></div>
 
   <div class="flex animate-scroll w-max will-change-transform">
     {
       [...technologies, ...technologies].map((tech, index) => (
-        <div 
+        <div
           class="flex items-center gap-2 pr-12 md:pr-20 group transition-all duration-300"
           aria-hidden={index >= technologies.length ? "true" : "false"}
         >
           <img
-            src={`${import.meta.env.BASE_URL}/svg/${tech}.svg`}
-            alt={tech}
+            src={`${import.meta.env.BASE_URL}/svg/${tech.icon}.svg`}
+            alt={tech.name}
             class="h-7 w-auto object-contain transition-transform group-hover:scale-110 opacity-60"
             width="30"
             height="30"
             loading={index < technologies.length ? "eager" : "lazy"}
             decoding="async"
           />
+
           <span class="text-lg font-medium text-[var(--white-icon)] whitespace-nowrap">
-            {tech.charAt(0).toUpperCase() + tech.slice(1)}
+            {tech.name}
           </span>
         </div>
       ))
@@ -51,10 +65,12 @@ const technologies = [
     0% {
       transform: translate3d(0, 0, 0);
     }
+
     100% {
       transform: translate3d(-50%, 0, 0);
     }
   }
+
   .animate-scroll {
     animation: scroll 60s linear infinite;
   }
