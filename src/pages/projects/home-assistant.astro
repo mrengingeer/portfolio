@@ -63,35 +63,26 @@ const automations = [
   <body class="bg-[var(--background)] text-[var(--white)] sm:px-28 lg:px-20 px-9">
 
     <!-- Navigation -->
-    <nav class="max-w-5xl mx-auto py-8 flex items-center justify-between">
+    <nav class="max-w-5xl mx-auto py-8">
       <a
         href={`${base}/`}
         class="text-[var(--white-icon)] hover:text-white transition"
       >
         ← Back to Portfolio
       </a>
-
-      <a
-        href="https://github.com/mrengingeer"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="text-[var(--white-icon)] hover:text-white transition"
-      >
-        GitHub ↗
-      </a>
     </nav>
 
 
-    <main class="max-w-5xl mx-auto pb-24">
+    <main class="max-w-5xl mx-auto pb-28">
 
       <!-- Hero -->
       <section class="pt-12 md:pt-20">
 
-        <p class="text-sm uppercase tracking-[0.2em] text-[var(--sec)] mb-4">
+        <p class="text-base md:text-lg uppercase tracking-[0.2em] text-[var(--sec)] mb-5 shiny-sec">
           Featured Project · IoT / Automation
         </p>
 
-        <h1 class="text-4xl md:text-6xl font-semibold leading-tight mb-6">
+        <h1 class="text-5xl md:text-7xl font-semibold leading-[1.05] mb-8">
           Home Assistant
           <br />
           Smart Home
@@ -105,7 +96,7 @@ const automations = [
 
 
         <!-- Technology tags -->
-        <div class="flex flex-wrap gap-2 mt-8">
+        <div class="flex flex-wrap gap-2 mt-4">
           {
             technologies.map((technology) => (
               <span
@@ -116,16 +107,13 @@ const automations = [
             ))
           }
         </div>
-
       </section>
-
-
       <!-- Hero image -->
-      <section class="mt-14">
+      <section class="mt-4">
 
         <div class="rounded-2xl overflow-hidden border border-[var(--white-icon-tr)]">
           <img
-            src={`${base}/projects/home-assistant/hero.png`}
+            src={`${base}/projects/home-assistant/home-assistant.png`}
             alt="Home Assistant smart home dashboard"
             class="w-full object-cover"
           />
@@ -135,17 +123,19 @@ const automations = [
 
 
       <!-- Overview -->
-      <section class="mt-20">
+      <section class="mt-4">
 
-        <p class="text-sm uppercase tracking-[0.2em] text-[var(--sec)] mb-3">
-          Overview
-        </p>
+        <div class="mb-4">
+          <p class="text-base md:text-lg uppercase tracking-[0.2em] text-[var(--sec)] mb-4 shiny-sec">
+            Overview
+          </p>
 
-        <h2 class="text-3xl md:text-4xl font-medium mb-6">
-          Building a connected home
-        </h2>
+          <h2 class="text-4xl md:text-5xl font-medium leading-tight">
+            Building a connected home
+          </h2>
+        </div>
 
-        <div class="max-w-3xl text-[var(--white-icon)] text-base md:text-lg leading-relaxed space-y-5">
+        <div class="max-w-4xl text-[var(--white-icon)] text-base md:text-lg leading-relaxed space-y-6">
 
           <p>
             This project started as an effort to bring different smart-home
@@ -173,50 +163,106 @@ const automations = [
 
 
       <!-- Architecture -->
-      <section class="mt-20">
+      <section class="mt-4">
 
-        <p class="text-sm uppercase tracking-[0.2em] text-[var(--sec)] mb-3">
-          Architecture
-        </p>
+        <div class="mb-4">
+          <p class="text-base md:text-lg uppercase tracking-[0.2em] text-[var(--sec)] mb-4 shiny-sec">
+            Architecture
+          </p>
 
-        <h2 class="text-3xl md:text-4xl font-medium mb-8">
-          How everything connects
-        </h2>
+          <h2 class="text-4xl md:text-5xl font-medium leading-tight">
+            How everything connects
+          </h2>
+        </div>
 
-        <div class="rounded-2xl border border-[var(--white-icon-tr)] bg-[#1414149c] p-6 md:p-10">
 
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-5 items-center text-center">
+        <!-- Architecture layout -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-10 items-center">
 
-            <div class="rounded-xl border border-[var(--white-icon-tr)] p-6">
-              <p class="text-lg font-semibold">Devices</p>
-              <p class="text-sm text-[var(--white-icon)] mt-2">
-                Zigbee · ESP32 · Cameras · Sensors
-              </p>
+          <!-- Diagram -->
+          <div class="rounded-2xl border border-[var(--white-icon-tr)] bg-[#1414149c] p-6 md:p-6">
+
+            <div class="flex flex-col items-center gap-3">
+
+              <!-- Devices -->
+              <div class="w-full max-w-xs rounded-xl border border-[var(--white-icon-tr)] p-5 text-center">
+
+                <p class="text-xl font-semibold">
+                  Devices
+                </p>
+
+                <p class="text-sm text-[var(--white-icon)] mt-2">
+                  Zigbee · ESP32 · Cameras · Sensors
+                </p>
+
+              </div>
+
+
+              <!-- Arrow -->
+              <div class="text-2xl text-[var(--sec)]">
+                ↓
+              </div>
+
+
+              <!-- Home Assistant -->
+              <div class="w-full max-w-xs rounded-xl border border-[var(--sec)] bg-[#a476ff10] p-5 text-center">
+
+                <p class="text-xl font-semibold">
+                  Home Assistant
+                </p>
+
+                <p class="text-sm text-[var(--white-icon)] mt-2">
+                  Integrations · States · Automations
+                </p>
+
+              </div>
+
+
+              <!-- Arrow -->
+              <div class="text-2xl text-[var(--sec)]">
+                ↓
+              </div>
+
+
+              <!-- Actions -->
+              <div class="w-full max-w-xs rounded-xl border border-[var(--white-icon-tr)] p-5 text-center">
+
+                <p class="text-xl font-semibold">
+                  Actions
+                </p>
+
+                <p class="text-sm text-[var(--white-icon)] mt-2">
+                  Lights · Blinds · Garage · Notifications
+                </p>
+
+              </div>
+
             </div>
 
-            <div class="text-2xl text-[var(--sec)]">
-              →
-            </div>
+          </div>
 
-            <div class="rounded-xl border border-[var(--white-icon-tr)] p-6">
-              <p class="text-lg font-semibold">Home Assistant</p>
-              <p class="text-sm text-[var(--white-icon)] mt-2">
-                Integrations · States · Automations
-              </p>
-            </div>
 
-            <div class="hidden md:block"></div>
+          <!-- Explanation -->
+          <div class="text-[var(--white-icon)] text-lg leading-relaxed space-y-6">
 
-            <div class="text-2xl text-[var(--sec)]">
-              ↓
-            </div>
+            <p>
+              The system is built around Home Assistant as the central
+              automation and orchestration layer.
+            </p>
 
-            <div class="rounded-xl border border-[var(--white-icon-tr)] p-6">
-              <p class="text-lg font-semibold">Actions</p>
-              <p class="text-sm text-[var(--white-icon)] mt-2">
-                Lights · Blinds · Garage · Notifications
-              </p>
-            </div>
+            <p>
+              Devices communicate with Home Assistant through different
+              protocols and integrations. Zigbee devices, ESP32 hardware,
+              cameras and other sensors provide the inputs that Home Assistant
+              can monitor and process.
+            </p>
+
+            <p>
+              Home Assistant then evaluates those states and events against
+              configured automations before triggering an action. This keeps
+              the individual devices decoupled from the logic controlling
+              them.
+            </p>
 
           </div>
 
@@ -226,24 +272,26 @@ const automations = [
 
 
       <!-- Automations -->
-      <section class="mt-20">
+      <section class="mt-28">
 
-        <p class="text-sm uppercase tracking-[0.2em] text-[var(--sec)] mb-3">
-          Automations
-        </p>
+        <div class="mb-10">
+          <p class="text-base md:text-lg uppercase tracking-[0.2em] text-[var(--sec)] mb-4 shiny-sec">
+            Automations
+          </p>
 
-        <h2 class="text-3xl md:text-4xl font-medium mb-4">
-          Turning events into actions
-        </h2>
+          <h2 class="text-4xl md:text-5xl font-medium leading-tight mb-5">
+            Turning events into actions
+          </h2>
 
-        <p class="max-w-3xl text-[var(--white-icon)] text-lg leading-relaxed mb-10">
-          The most interesting part of the system is the automation layer.
-          Instead of controlling every device manually, Home Assistant
-          combines information from multiple sources to trigger actions.
-        </p>
+          <p class="max-w-3xl text-[var(--white-icon)] text-lg leading-relaxed">
+            Instead of controlling every device manually, Home Assistant
+            combines information from multiple sources to trigger actions
+            throughout the home.
+          </p>
+        </div>
 
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 
           {
             automations.map((automation) => (
@@ -256,9 +304,9 @@ const automations = [
                   loading="lazy"
                 />
 
-                <div class="p-6">
+                <div class="p-4">
 
-                  <h3 class="text-2xl font-semibold mb-3">
+                  <h3 class="text-2xl md:text-3xl font-semibold mb-3">
                     {automation.title}
                   </h3>
 
@@ -278,17 +326,19 @@ const automations = [
 
 
       <!-- Vehicle automation -->
-      <section class="mt-20">
+      <section class="mt-28">
 
-        <p class="text-sm uppercase tracking-[0.2em] text-[var(--sec)] mb-3">
-          Example Automation
-        </p>
+        <div class="mb-10">
+          <p class="text-base md:text-lg uppercase tracking-[0.2em] text-[var(--sec)] mb-4 shiny-sec">
+            Example Automation
+          </p>
 
-        <h2 class="text-3xl md:text-4xl font-medium mb-6">
-          Vehicle arrival detection
-        </h2>
+          <h2 class="text-4xl md:text-5xl font-medium leading-tight">
+            Vehicle arrival detection
+          </h2>
+        </div>
 
-        <p class="max-w-3xl text-[var(--white-icon)] text-lg leading-relaxed mb-8">
+        <p class="max-w-3xl text-[var(--white-icon)] text-lg leading-relaxed mb-10">
           One of the more complex automations uses location data from a
           mobile device to determine when the vehicle is approaching home.
           Home Assistant can then use that presence information as an input
@@ -298,7 +348,7 @@ const automations = [
 
         <div class="rounded-2xl border border-[var(--white-icon-tr)] bg-[#1414149c] p-6 md:p-10">
 
-          <div class="flex flex-col md:flex-row items-center justify-between gap-5">
+          <div class="flex flex-col md:flex-row items-center justify-between gap-6">
 
             <div class="text-center">
               <div class="text-3xl mb-2">📱</div>
@@ -308,7 +358,9 @@ const automations = [
               </p>
             </div>
 
-            <div class="text-2xl text-[var(--sec)]">→</div>
+            <div class="text-2xl text-[var(--sec)]">
+              →
+            </div>
 
             <div class="text-center">
               <div class="text-3xl mb-2">📍</div>
@@ -318,7 +370,9 @@ const automations = [
               </p>
             </div>
 
-            <div class="text-2xl text-[var(--sec)]">→</div>
+            <div class="text-2xl text-[var(--sec)]">
+              →
+            </div>
 
             <div class="text-center">
               <div class="text-3xl mb-2">⚙️</div>
@@ -328,7 +382,9 @@ const automations = [
               </p>
             </div>
 
-            <div class="text-2xl text-[var(--sec)]">→</div>
+            <div class="text-2xl text-[var(--sec)]">
+              →
+            </div>
 
             <div class="text-center">
               <div class="text-3xl mb-2">🏠</div>
@@ -346,19 +402,22 @@ const automations = [
 
 
       <!-- Camera system -->
-      <section class="mt-20">
+      <section class="mt-28">
 
-        <p class="text-sm uppercase tracking-[0.2em] text-[var(--sec)] mb-3">
-          Computer Vision
-        </p>
+        <div class="mb-10">
+          <p class="text-base md:text-lg uppercase tracking-[0.2em] text-[var(--sec)] mb-4 shiny-sec">
+            Computer Vision
+          </p>
 
-        <h2 class="text-3xl md:text-4xl font-medium mb-6">
-          Local camera processing with Frigate
-        </h2>
+          <h2 class="text-4xl md:text-5xl font-medium leading-tight">
+            Local camera processing with Frigate
+          </h2>
+        </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
 
-          <div class="text-[var(--white-icon)] text-lg leading-relaxed space-y-5">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+
+          <div class="text-[var(--white-icon)] text-lg leading-relaxed space-y-6">
 
             <p>
               Security cameras provide RTSP streams that can be processed
@@ -373,6 +432,7 @@ const automations = [
             </p>
 
           </div>
+
 
           <div class="rounded-2xl overflow-hidden border border-[var(--white-icon-tr)]">
             <img
@@ -389,17 +449,20 @@ const automations = [
 
 
       <!-- ESP32 -->
-      <section class="mt-20">
+      <section class="mt-28">
 
-        <p class="text-sm uppercase tracking-[0.2em] text-[var(--sec)] mb-3">
-          Custom Hardware
-        </p>
+        <div class="mb-10">
+          <p class="text-base md:text-lg uppercase tracking-[0.2em] text-[var(--sec)] mb-4 shiny-sec">
+            Custom Hardware
+          </p>
 
-        <h2 class="text-3xl md:text-4xl font-medium mb-6">
-          ESP32 and ESPHome
-        </h2>
+          <h2 class="text-4xl md:text-5xl font-medium leading-tight">
+            ESP32 and ESPHome
+          </h2>
+        </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
 
           <div class="rounded-2xl overflow-hidden border border-[var(--white-icon-tr)]">
             <img
@@ -410,7 +473,8 @@ const automations = [
             />
           </div>
 
-          <div class="text-[var(--white-icon)] text-lg leading-relaxed space-y-5">
+
+          <div class="text-[var(--white-icon)] text-lg leading-relaxed space-y-6">
 
             <p>
               Custom ESP32 devices extend the system beyond commercially
@@ -436,20 +500,23 @@ const automations = [
 
 
       <!-- Engineering challenges -->
-      <section class="mt-20">
+      <section class="mt-28">
 
-        <p class="text-sm uppercase tracking-[0.2em] text-[var(--sec)] mb-3">
-          Engineering Challenges
-        </p>
+        <div class="mb-10">
+          <p class="text-base md:text-lg uppercase tracking-[0.2em] text-[var(--sec)] mb-4 shiny-sec">
+            Engineering Challenges
+          </p>
 
-        <h2 class="text-3xl md:text-4xl font-medium mb-8">
-          Problems worth solving
-        </h2>
+          <h2 class="text-4xl md:text-5xl font-medium leading-tight">
+            Problems worth solving
+          </h2>
+        </div>
 
-        <div class="space-y-4">
 
-          <div class="rounded-xl border border-[var(--white-icon-tr)] p-6">
-            <h3 class="text-xl font-semibold mb-2">
+        <div class="space-y-5">
+
+          <div class="rounded-xl border border-[var(--white-icon-tr)] p-7">
+            <h3 class="text-xl md:text-2xl font-semibold mb-3">
               Keeping the system local
             </h3>
 
@@ -461,8 +528,8 @@ const automations = [
           </div>
 
 
-          <div class="rounded-xl border border-[var(--white-icon-tr)] p-6">
-            <h3 class="text-xl font-semibold mb-2">
+          <div class="rounded-xl border border-[var(--white-icon-tr)] p-7">
+            <h3 class="text-xl md:text-2xl font-semibold mb-3">
               Integrating different ecosystems
             </h3>
 
@@ -473,8 +540,8 @@ const automations = [
           </div>
 
 
-          <div class="rounded-xl border border-[var(--white-icon-tr)] p-6">
-            <h3 class="text-xl font-semibold mb-2">
+          <div class="rounded-xl border border-[var(--white-icon-tr)] p-7">
+            <h3 class="text-xl md:text-2xl font-semibold mb-3">
               Making automations reliable
             </h3>
 
@@ -491,15 +558,17 @@ const automations = [
 
 
       <!-- Future -->
-      <section class="mt-20">
+      <section class="mt-28">
 
-        <p class="text-sm uppercase tracking-[0.2em] text-[var(--sec)] mb-3">
-          What's Next
-        </p>
+        <div class="mb-10">
+          <p class="text-base md:text-lg uppercase tracking-[0.2em] text-[var(--sec)] mb-4 shiny-sec">
+            What's Next
+          </p>
 
-        <h2 class="text-3xl md:text-4xl font-medium mb-6">
-          Continuing to evolve the system
-        </h2>
+          <h2 class="text-4xl md:text-5xl font-medium leading-tight">
+            Continuing to evolve the system
+          </h2>
+        </div>
 
         <p class="max-w-3xl text-[var(--white-icon)] text-lg leading-relaxed">
           The system is intentionally modular, making it possible to add
@@ -511,27 +580,14 @@ const automations = [
 
 
       <!-- Footer navigation -->
-      <section class="mt-20 pt-10 border-t border-[#ffffff10]">
+      <section class="mt-28 pt-10 border-t border-[#ffffff10]">
 
-        <div class="flex flex-col md:flex-row gap-4 justify-between">
-
-          <a
-            href={`${base}/`}
-            class="text-[var(--white-icon)] hover:text-white transition"
-          >
-            ← Back to Portfolio
-          </a>
-
-          <a
-            href="https://github.com/mrengingeer"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="text-[var(--white-icon)] hover:text-white transition"
-          >
-            View GitHub ↗
-          </a>
-
-        </div>
+        <a
+          href={`${base}/`}
+          class="text-[var(--white-icon)] hover:text-white transition"
+        >
+          ← Back to Portfolio
+        </a>
 
       </section>
 
