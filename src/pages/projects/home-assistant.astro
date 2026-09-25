@@ -16,25 +16,25 @@ const automations = [
   {
     title: "Vehicle Arrival",
     description:
-      "Uses phone-based GPS presence to determine when the vehicle arrives home and trigger garage-related automations.",
+      "Uses phone-based GPS presence to determine when the vehicle arrives home and trigger garage and other related automations.",
     image: `${base}/projects/home-assistant/vehicle-arrival.png`,
   },
   {
-    title: "Camera Detection",
+    title: "Stair Light",
     description:
-      "Local camera streams are processed through Frigate for object detection and integrated into Home Assistant.",
+      "Stairs lighting controlled soely through motion detetcion and sensor data.",
     image: `${base}/projects/home-assistant/frigate.png`,
   },
   {
     title: "Smart Blinds",
     description:
-      "Zigbee-controlled blinds are integrated into Home Assistant for centralized control and automation.",
+      "Smart blinds are integrated into Home Assistant for centralized control and daily automation.",
     image: `${base}/projects/home-assistant/blinds.png`,
   },
   {
     title: "ESP32 Control Panel",
     description:
-      "A custom ESP32-S3 touchscreen interface provides a dedicated dashboard for controlling and monitoring the home.",
+      "A custom ESP32-S3 touchscreen interface provides a dedicated dashboard for controlling my bedroom.",
     image: `${base}/projects/home-assistant/control-panel.png`,
   },
 ];
@@ -326,6 +326,235 @@ const automations = [
 
       </section>
 
+          <!-- Smart blinds -->
+      <section class="mt-10">
+        <div class="mb-10">
+          <p
+            class="text-base md:text-lg uppercase tracking-[0.2em] text-[var(--sec)] mb-4 shiny-sec"
+          >
+            Smart Blinds
+          </p>
+
+          <h2 class="text-4xl md:text-5xl font-medium leading-tight">
+            From 15 manual blinds to full automation
+          </h2>
+        </div>
+
+        <div class="max-w-4xl text-[var(--white-icon)] text-lg leading-relaxed space-y-6">
+          <p>
+            Opening and closing nearly 15 blinds every day became a surprisingly
+            tedious routine. Rather than continuing to operate each blind
+            manually, I decided to build a system that could automate the
+            entire process.
+          </p>
+
+          <p>
+            The project started with selecting the right hardware. I took
+            measurements for each window, researched different smart-blind
+            technologies and evaluated how the blinds would communicate with
+            the rest of the smart home. Because the blinds are battery powered,
+            power consumption was an important consideration. I wanted to avoid
+            putting unnecessary load on the home's Wi-Fi network while also
+            maximizing battery life.
+          </p>
+
+          <p>
+            After researching the available options, I chose rechargeable
+            Zigbee blinds. Zigbee provided a lower-power wireless option that
+            could integrate with the existing smart-home infrastructure without
+            putting every blind directly onto Wi-Fi.
+          </p>
+        </div>
+
+        <!-- Hardware challenge -->
+        <div class="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+          <div
+            class="rounded-2xl border border-[var(--white-icon-tr)] bg-[#1414149c] p-7 md:p-9"
+          >
+            <p
+              class="text-base uppercase tracking-[0.2em] text-[var(--sec)] mb-4 shiny-sec"
+            >
+              Challenge
+            </p>
+
+            <h3 class="text-2xl md:text-3xl font-semibold mb-5">
+              They weren't actually Zigbee blinds
+            </h3>
+
+            <p class="text-[var(--white-icon)] leading-relaxed">
+              The blinds were marketed as Zigbee-compatible, but after
+              integrating them into the system I discovered that the blinds
+              themselves were actually controlled using RF. The Zigbee hub
+              acted as a bridge between the blinds and the Tuya ecosystem.
+            </p>
+          </div>
+
+          <div class="text-[var(--white-icon)] text-lg leading-relaxed space-y-6">
+            <p>
+              This introduced a reliability problem. The hub would occasionally
+              go offline, and individual blinds could disconnect from the
+              system. That meant an automation could run successfully while
+              some blinds failed to respond.
+            </p>
+
+            <p>
+              Instead of replacing the blinds, I decided to remove the
+              unreliable dependency and communicate with the RF-controlled
+              blinds directly.
+            </p>
+          </div>
+        </div>
+
+        <!-- ESP32 solution -->
+        <div class="mt-16">
+          <div class="mb-10">
+            <p
+              class="text-base md:text-lg uppercase tracking-[0.2em] text-[var(--sec)] mb-4 shiny-sec"
+            >
+              Engineering Solution
+            </p>
+
+            <h3 class="text-3xl md:text-4xl font-medium leading-tight">
+              Replacing the unreliable hub with an ESP32 RF controller
+            </h3>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+            <div
+              class="rounded-2xl border border-[var(--white-icon-tr)] bg-[#1414149c] p-7 md:p-9"
+            >
+              <div class="flex flex-col items-center gap-4">
+                <div
+                  class="w-full rounded-xl border border-[var(--white-icon-tr)] p-5 text-center"
+                >
+                  <p class="text-xl font-semibold">Home Assistant</p>
+                  <p class="text-sm text-[var(--white-icon)] mt-2">
+                    Automation &amp; Scheduling
+                  </p>
+                </div>
+
+                <div class="text-2xl text-[var(--sec)]">
+                  ↓
+                </div>
+
+                <div
+                  class="w-full rounded-xl border border-[var(--sec)] bg-[#a476ff10] p-5 text-center"
+                >
+                  <p class="text-xl font-semibold">ESP32</p>
+                  <p class="text-sm text-[var(--white-icon)] mt-2">
+                    Custom RF control
+                  </p>
+                </div>
+
+                <div class="text-2xl text-[var(--sec)]">
+                  ↓
+                </div>
+
+                <div
+                  class="w-full rounded-xl border border-[var(--white-icon-tr)] p-5 text-center"
+                >
+                  <p class="text-xl font-semibold">RF Blinds</p>
+                  <p class="text-sm text-[var(--white-icon)] mt-2">
+                    Open · Close · Stop
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="text-[var(--white-icon)] text-lg leading-relaxed space-y-6">
+              <p>
+                I used an ESP32 with an RF transceiver to capture and reproduce
+                the wireless commands used by the blinds. Rather than relying
+                on the Tuya Zigbee hub, the ESP32 became the direct bridge
+                between Home Assistant and the RF-controlled blinds.
+              </p>
+
+              <p>
+                The RF commands were reverse engineered by capturing the
+                signals generated by the original controller and then
+                reproducing those commands from the ESP32. I then integrated
+                the custom controller with Home Assistant so the blinds could
+                be exposed to the same automation system as the rest of the
+                house.
+              </p>
+
+              <p>
+                This approach eliminated the unreliable hub from the control
+                path while giving me direct control over the blinds through
+                software and custom hardware.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Final automation -->
+        <div class="mt-16">
+          <div class="mb-10">
+            <p
+              class="text-base md:text-lg uppercase tracking-[0.2em] text-[var(--sec)] mb-4 shiny-sec"
+            >
+              Final Result
+            </p>
+
+            <h3 class="text-3xl md:text-4xl font-medium leading-tight">
+              A completely automated daily routine
+            </h3>
+          </div>
+
+          <div class="max-w-4xl text-[var(--white-icon)] text-lg leading-relaxed space-y-6">
+            <p>
+              The finished system now handles the daily opening and closing of
+              the blinds automatically. Home Assistant uses sunrise and sunset
+              as triggers, sending the appropriate commands to the ESP32 RF
+              controller.
+            </p>
+
+            <p>
+              What started as a repetitive task involving nearly 15 individual
+              blinds is now handled automatically without requiring manual
+              interaction. The project also demonstrated how custom hardware
+              and software can be used to work around limitations in
+              off-the-shelf smart-home products.
+            </p>
+
+            <p>
+              I also now use use the smart blinds in other automations such as the one in the bathroom
+              is connected to a door sensor. Once someone enters to use the restroom and closes the door,
+              the blind closes all the way for privacy. Once done, and the door is opened, the blinds open
+              to the set amount. <br>
+              Also, I have an automation setup for the ones in my room to open acording to my daily alarm.
+              The options really are endless!
+            </p>
+          </div>
+
+          <div
+            class="mt-10 rounded-2xl border border-[var(--sec)] bg-[#a476ff10] p-7 md:p-9"
+          >
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+              <div>
+                <p class="text-3xl md:text-4xl font-semibold">~15</p>
+                <p class="text-sm text-[var(--white-icon)] mt-2">
+                  Blinds automated
+                </p>
+              </div>
+
+              <div>
+                <p class="text-3xl md:text-4xl font-semibold">ESP32</p>
+                <p class="text-sm text-[var(--white-icon)] mt-2">
+                  Custom RF controller
+                </p>
+              </div>
+
+              <div>
+                <p class="text-3xl md:text-4xl font-semibold">2× Daily</p>
+                <p class="text-sm text-[var(--white-icon)] mt-2">
+                  Sunrise &amp; sunset automation + more
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <!-- Vehicle automation -->
       <section class="mt-8">
@@ -366,9 +595,9 @@ const automations = [
 
             <div class="text-center">
               <div class="text-3xl mb-2">📍</div>
-              <p class="font-medium">Home Zone</p>
+              <p class="font-medium">Enter Home Zone</p>
               <p class="text-xs text-[var(--white-icon)]">
-                Presence
+                Geofence, Presence
               </p>
             </div>
 
@@ -392,7 +621,7 @@ const automations = [
               <div class="text-3xl mb-2">🏠</div>
               <p class="font-medium">Home Action</p>
               <p class="text-xs text-[var(--white-icon)]">
-                Device control
+                Open Garage, Notification 
               </p>
             </div>
 
@@ -491,7 +720,10 @@ const automations = [
 
             <p>
               This approach also makes it possible to build interfaces and
-              devices specifically around the needs of the home.
+              devices specifically around the needs of the home. For example, 
+              a panel in my bedroom for all the devices that are there instead 
+              of going through the entire main dashboard just to control that rooms 
+              devices.
             </p>
 
           </div>
