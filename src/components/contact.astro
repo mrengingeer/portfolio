@@ -48,8 +48,8 @@
     </div>
 
     <div class="text-[var(--white-icon)] mt-1">
-      Type
-      <span class="text-[var(--sec)]">reveal</span>
+      Hint: Type
+      <span class="text-[var(--sec)]"> reveal </span>
       and press Enter.
     </div>
 
@@ -76,7 +76,7 @@
       <div class="flex flex-wrap gap-3">
         <!-- Call -->
         <a
-          href="tel:+1YOURPHONENUMBER"
+          href="tel:+1-647-303-7432"
           class="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-[var(--white-icon-tr)] bg-[#ffffff05] text-[var(--white)] transition-all hover:bg-[var(--sec)] hover:text-[var(--background)]"
         >
           <svg
@@ -207,42 +207,131 @@
 
 <script type="module" is:inline>
   // ================================
-  // Phone Terminal
+  // Interactive Phone Terminal
   // ================================
 
-  const phoneLoading = document.getElementById("phone-loading");
-  const phoneProgress = document.getElementById("phone-progress");
-  const phonePercent = document.getElementById("phone-percent");
-  const phoneResult = document.getElementById("phone-result");
+  const terminal = document.getElementById("phone-terminal");
+  const commandInput = document.getElementById("terminal-command");
+  const terminalHistory = document.getElementById("terminal-history");
+  const phoneActions = document.getElementById("phone-actions");
+
   const copyPhone = document.getElementById("copy-phone");
   const copyText = document.getElementById("copy-text");
 
-  let progress = 0;
+  const displayPhoneNumber = "+1-647-303-7432";
+  const phoneNumber = "+1-647-303-7432";
 
-  const progressInterval = setInterval(() => {
-    progress += Math.floor(Math.random() * 8) + 3;
+  let phoneRevealed = false;
 
-    if (progress >= 100) {
-      progress = 100;
-      clearInterval(progressInterval);
+  // Focus terminal input when terminal is clicked
+  terminal.addEventListener("click", () => {
+    commandInput.focus();
+  });
+
+  commandInput.addEventListener("keydown", (event) => {
+    if (event.key !== "Enter") return;
+
+    const command = commandInput.value.trim().toLowerCase();
+
+    if (!command) return;
+
+    // Display entered command
+    const commandLine = document.createElement("div");
+
+    commandLine.innerHTML = `
+      <span class="text-[var(--sec)]">$</span>
+      <span class="text-[var(--white)]">${escapeHTML(command)}</span>
+    `;
+
+    terminalHistory.appendChild(commandLine);
+
+    commandInput.value = "";
+
+    // ================================
+    // REVEAL
+    // ================================
+
+    if (command === "reveal") {
+      if (phoneRevealed) {
+        addTerminalResponse(
+          "Phone number has already been revealed.",
+          "text-[var(--white-icon)]"
+        );
+
+        return;
+      }
+
+      phoneRevealed = true;
+
+      addTerminalResponse(
+        "Access granted.",
+        "text-[#27c93f]"
+      );
 
       setTimeout(() => {
-        phoneLoading.classList.add("hidden");
-        phoneResult.classList.remove("hidden");
-      }, 400);
+        addTerminalResponse(
+          `Phone: ${displayPhoneNumber}`,
+          "text-[var(--white)] text-base"
+        );
+
+        phoneActions.classList.remove("hidden");
+      }, 350);
+
+      return;
     }
 
-    phoneProgress.style.width = `${progress}%`;
-    phonePercent.textContent = `${progress}%`;
-  }, 80);
+    // ================================
+    // HELP
+    // ================================
+
+    if (command === "help") {
+      addTerminalResponse(
+        "Available commands: reveal, clear, help",
+        "text-[var(--white-icon)]"
+      );
+
+      return;
+    }
+
+    // ================================
+    // CLEAR
+    // ================================
+
+    if (command === "clear") {
+      terminalHistory.innerHTML = "";
+      return;
+    }
+
+    // ================================
+    // UNKNOWN COMMAND
+    // ================================
+
+    addTerminalResponse(
+      `command not found: ${command}`,
+      "text-[#ff5f56]"
+    );
+  });
+
+  function addTerminalResponse(message, className) {
+    const response = document.createElement("div");
+
+    response.className = className;
+    response.textContent = message;
+
+    terminalHistory.appendChild(response);
+  }
+
+  function escapeHTML(value) {
+    const div = document.createElement("div");
+    div.textContent = value;
+    return div.innerHTML;
+  }
 
   // ================================
   // Copy Phone Number
   // ================================
 
   copyPhone.addEventListener("click", async () => {
-    const phoneNumber = "+16473037432";
-
     try {
       await navigator.clipboard.writeText(phoneNumber);
 
@@ -253,6 +342,7 @@
       }, 2000);
     } catch (error) {
       console.error("Unable to copy phone number:", error);
+
       copyText.textContent = "Failed";
 
       setTimeout(() => {
@@ -260,6 +350,7 @@
       }, 2000);
     }
   });
+
 
   // ================================
   // Contact Form
